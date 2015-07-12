@@ -1,47 +1,45 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
 
-<html>
-  <head>
-    <meta charset="utf-8">
-    <link type="text/css" rel="stylesheet" href="/static/styles.css" />
-    <title>wiki: login</title>
-  </head>
+{% block nav %}
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="{{ signup_url }}">signup</a>
+                    </li>
+                </ul>
+{% endblock %}
 
-  <body>
-    <nav>
-      <a href="{{ signup_url }}">signup</a>
-    </nav>
+{% block content %}
+        <div class="row">
 
-    <div id="page">
-      <!-- the login form for existing users -->
-      <div class="login-area">
-        <h1 id="sign">Login</h1>
+            <!-- Wiki Entries Column -->
+            <div class="col-md-8">
 
-        <form method="post">
-          <table>
-            <tr>
-              <td><label>Username</label></td>
-              <td>
-                <input type="text" name="username"
-                  value="{{ username }}">
-              </td>
-            </tr>
+                <h1 class="page-header">Login</h1>
 
-            <tr>
-              <td><label>Password</label></td>
-              <td>
-                <input type="password" name="password"
-                  value="{{ password }}">
-                <p class="error">{{ err }}</p>
-              </td>
-            </tr>
+                <form method="post">
+                  <table>
+                        <tr>
+                            <td><label>Username&nbsp;&nbsp;</label></td>
+                            <td>
+                                <input class="form-control" type="text" name="username" value="{{ username }}">
+                             </td>
+                        </tr>
 
-            <tr>
-              <td colspan="2"><input type="submit" value="submit"></td>
-            </tr>
-          </table>
-        </form>
-      </div><!-- the form ends -->
-    </div><!-- page ends -->
-  </body>
-</html>
+                        <tr>
+                            <td><label>Password&nbsp;&nbsp;</label></td>
+                            <td>
+                                <input class="form-control" type="password" name="password" value="{{ password }}">
+                                <p class="has-warning">{{ err }}</p>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="2"><input class="btn btn-default" type="submit" value="submit"></td>
+                        </tr>
+                    </table>
+                </form>
+
+            </div>
+        </div>
+        <!-- /.row -->
+{% endblock %}

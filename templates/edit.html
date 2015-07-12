@@ -1,33 +1,64 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
 
-<html>
-<head>
-    <meta charset="utf-8">
-    <link type="text/css" rel="stylesheet" href="/static/styles.css" />
-    <title>wiki: edit</title>
-</head>
-<body>
-  <nav>
-    {{ username }} (<a href="{{ logout_url }}">logout</a>)
-  </nav>
+{% block nav %}
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="{{ logout_url }}">{{ username }} (logout)</a>
+                    </li>
+                </ul>
+{% endblock %}
 
-  <div id="page">
+{% block content %}
+        <div class="row">
 
-    <form method="post">
+            <!-- Wiki Entries Column -->
+            <div class="col-md-8">
 
-      <div class="entry">
-        <p><textarea class="wiki-entry"
-          name="content">{{ content }}</textarea></p>
-      </div>
+                <h1 class="page-header">Edit</h1>
 
-      <div class="entry"><p><input type="submit" value="save"></p></div>
+                <!-- First Wiki Post -->
+                <h2>
+                    <a href="{{ page_name }}">{{ page_name|replace('/', '', count=None) }}</a>
+                </h2>
 
-      {% if error %}
-      <p class="error"> {{ error }}</p>
-      {% endif %}
-    </form>
+                <div class="well">
+                    <form method="post">
 
-  </div><!-- page ends -->
+                      <div class="entry">
+                        <p><textarea rows="10" class="form-control" name="content">{{ content }}</textarea></p>
+                      </div>
 
-</body>
-</html>
+                      <input type="submit" class="btn btn-default" value="save">
+
+                      {% if error %}
+                      <p class="has-warning"> {{ error }}</p>
+                      {% endif %}
+                    </form>
+                </div>
+                <hr>
+
+            </div>
+
+            <!-- Wiki Sidebar Widgets Column -->
+            <div class="col-md-4">
+
+                <!-- Wiki Categories Well -->
+                <div class="well">
+                    <h4>Recent Pages</h4>
+                    <div class="row">
+                        <div class="col-lg-6">
+                        {% if pages %}
+                          <ul class="list-unstyled">
+                            {% for page in pages %}
+                            <li><a href="{{ page }}">{{ page|replace('/', '', count=None) }}</a></li>
+                          {% endfor %}
+                         </ul>
+                        {% endif %}
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+{% endblock %}

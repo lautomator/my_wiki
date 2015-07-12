@@ -1,44 +1,71 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
 
-<html>
-  <head>
-    <meta charset="utf-8">
-    <link type="text/css" rel="stylesheet" href="/static/styles.css" />
-    <title>wiki</title>
-  </head>
+{% block nav %}
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="{{ logout_url }}">{{ username }} (logout)</a>
+                    </li>
+                    <li>
+                        <a href="{{ edit_url + page_name }}">edit</a>
+                    </li>
+                </ul>
+{% endblock %}
 
-  <body>
-    <nav>
-      <a href="{{ edit_url + page_name }}">edit</a>
-      | {{ username }} (<a href="{{ logout_url }}">logout</a>)
-    </nav>
+{% block content %}
+        <div class="row">
 
-    <div id="page">
-      <div>
-        <h2>pages</h2>
-        {% if pages %}
-          <ol>
-            {% for page in pages %}
-            <li><a href="{{ page }}">{{ page }}</a></li>
-          {% endfor %}
-         </ol>
-        {% endif %}
-      </div>
+            <!-- Wiki Entries Column -->
+            <div class="col-md-8">
 
-      <div>{{ content|safe }}</div>
+                <!-- First Wiki Post -->
+                <h2>
+                    <a href="{{ page_name }}">{{ page_name|replace('/', '', count=None) }}</a>
+                </h2>
+                <p class="lead">
+                    by <span class="nonlink">{{ username }}</span>
+                </p>
+                <p><span class="glyphicon glyphicon-time"></span> {{ created }}</p>
+                <hr>
+                {{ content|safe }}
+                <hr>
 
-      <div>
-        <form method="post">
-          <label>Create a new page</label>
-          <input type="text" name="new_page">
-          <input type="submit" value="submit">
-        </form>
-        
-        {% if error %}
-        <p class="error"> {{ error }}</p>
-        {% endif %}
-      </div>
+            </div>
 
-    </div><!-- page ends -->
-  </body>
-</html>
+            <!-- Wiki Sidebar Widgets Column -->
+            <div class="col-md-4">
+
+                <!-- Wiki Create Page Well -->
+                <div class="well">
+                    <h4>Create a new page</h4>
+                    <div class="input-group">
+                        <form method="post">
+                            <input type="text" class="form-control" name="new_page"><br><br>
+                            <input type="submit" class="btn btn-default" value="submit">
+                        </form>
+                        {% if error %}
+                        <p class="has-warning"> {{ error }}</p>
+                        {% endif %}
+                    </div>
+                    <!-- /.input-group -->
+                </div>
+
+                <!-- Wiki Categories Well -->
+                <div class="well">
+                    <h4>Recent Pages</h4>
+                    <div class="row">
+                        <div class="col-lg-6">
+                        {% if pages %}
+                          <ul class="list-unstyled">
+                            {% for page in pages %}
+                            <li><a href="{{ page }}">{{ page|replace('/', '', count=None) }}</a></li>
+                          {% endfor %}
+                         </ul>
+                        {% endif %}
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+{% endblock %}

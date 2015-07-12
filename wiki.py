@@ -192,13 +192,12 @@ class WikiPage(Handler, WikiHandler):
                          error=""):
 
         username = self.user.name
-
         pages = self.get_all_pages()
-
         p = self.get_page(page_name)
 
         if p:
             content = p.content
+            created = p.created.date()
 
             self.render(
                 "page.html",
@@ -225,7 +224,7 @@ class WikiPage(Handler, WikiHandler):
         a_new_page = self.request.get("new_page")
 
         if a_new_page:
-            self.redirect(str(a_new_page.replace(' ', '_')))
+            self.redirect(str(a_new_page))
 
         else:
             error = "That page already exists."
@@ -235,11 +234,13 @@ class WikiPage(Handler, WikiHandler):
 class EditPage(Handler, WikiHandler):
     def edit_article(self,
                      username="",
+                     pages="",
                      page_name="",
                      content="",
                      error=""):
 
         p = self.get_page(page_name)
+        pages = self.get_all_pages()
 
         if p:
             content = p.content
@@ -247,6 +248,7 @@ class EditPage(Handler, WikiHandler):
         self.render(
             "edit.html",
             username=self.user.name,
+            pages=pages,
             page_name=page_name,
             content=content,
             error=error,
