@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <link type="text/css" rel="stylesheet" href="/static/styles.css" />
+    <title>wiki: edit</title>
+</head>
+<body>
+  <nav>
+    {{ username }} (<a href="{{ logout_url }}">logout</a>)
+  </nav>
+
+  <div id="page">
+
+    <form method="post">
+
+      <div class="entry">
+        <p><textarea class="wiki-entry"
+          name="content">{{ content }}</textarea></p>
+      </div>
+
+      <div class="entry"><p><input type="submit" value="save"></p></div>
+
+      {% if error %}
+      <p class="error"> {{ error }}</p>
+      {% endif %}
+    </form>
+
+  </div><!-- page ends -->
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link type="text/css" rel="stylesheet" href="/static/styles.css" />
+    <title>wiki: login</title>
+  </head>
+
+  <body>
+    <nav>
+      <a href="{{ signup_url }}">signup</a>
+    </nav>
+
+    <div id="page">
+      <!-- the login form for existing users -->
+      <div class="login-area">
+        <h1 id="sign">Login</h1>
+
+        <form method="post">
+          <table>
+            <tr>
+              <td><label>Username</label></td>
+              <td>
+                <input type="text" name="username"
+                  value="{{ username }}">
+              </td>
+            </tr>
+
+            <tr>
+              <td><label>Password</label></td>
+              <td>
+                <input type="password" name="password"
+                  value="{{ password }}">
+                <p class="error">{{ err }}</p>
+              </td>
+            </tr>
+
+            <tr>
+              <td colspan="2"><input type="submit" value="submit"></td>
+            </tr>
+          </table>
+        </form>
+      </div><!-- the form ends -->
+    </div><!-- page ends -->
+  </body>
+</html>

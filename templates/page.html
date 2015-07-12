@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link type="text/css" rel="stylesheet" href="/static/styles.css" />
+    <title>wiki</title>
+  </head>
+
+  <body>
+    <nav>
+      <a href="{{ edit_url + page_name }}">edit</a>
+      | {{ username }} (<a href="{{ logout_url }}">logout</a>)
+    </nav>
+
+    <div id="page">
+      <div>
+        <h2>pages</h2>
+        {% if pages %}
+          <ol>
+            {% for page in pages %}
+            <li><a href="{{ page }}">{{ page }}</a></li>
+          {% endfor %}
+         </ol>
+        {% endif %}
+      </div>
+
+      <div>{{ content|safe }}</div>
+
+      <div>
+        <form method="post">
+          <label>Create a new page</label>
+          <input type="text" name="new_page">
+          <input type="submit" value="submit">
+        </form>
+        
+        {% if error %}
+        <p class="error"> {{ error }}</p>
+        {% endif %}
+      </div>
+
+    </div><!-- page ends -->
+  </body>
+</html>
