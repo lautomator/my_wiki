@@ -224,7 +224,7 @@ class WikiPage(Handler, WikiHandler):
         a_new_page = self.request.get("new_page")
 
         if a_new_page:
-            self.redirect(str(a_new_page))
+            self.redirect(str(a_new_page.replace(' ', '_')))
 
         else:
             error = "That page already exists."
