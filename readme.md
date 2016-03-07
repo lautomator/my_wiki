@@ -13,11 +13,11 @@ To set this up, you will need to:
 * create an `env` directory: `virtualenv env`
 * activate the environment: `source env/bin/activate`
 * get the requirments for this project installed: `pip install -r requirements.txt`
-* run the appserver: `dev_appserver ../my_wiki` (You may need to be the root user)
+* run the appserver: `dev_appserver.py ../my_wiki` (You may need to be the root user)
 
 ## Technical
 The site is authored using Webapp2 (google app engine).
 See the `requirements.txt` for **virtualenv** specs.
 
 ## Deployment
-Try the app [here](http://t-decoder-840.appspot.com/); create a user account and login.
+View the app [here](http://t-decoder-840.appspot.com/).
